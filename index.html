@@ -254,11 +254,6 @@
   .impact .num{ font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--measure); }
   .impact .lbl{ font-size: 12px; color: var(--text-faint); margin-top: 2px; max-width: 140px; }
 
-  .criteria-row{ display:flex; gap: 10px; flex-wrap: wrap; position: relative; z-index:1; }
-  .criteria{
-    font-family: var(--font-mono); font-size: 12px; color: var(--gold);
-    border: 1px solid var(--line); border-radius: 3px; padding: 6px 10px;
-  }
 
   .case-link{
     margin-top: 22px; position: relative; z-index:1;
@@ -458,9 +453,10 @@
             The initial brief called for a set of standalone reports — but that would only partially fix the real problem: fragmented data access across teams. I used an Impact/Effort framework to align stakeholders on a phased approach: the first modules shipped as production-ready parts of the eventual system, not throwaway prototypes — giving fast visible progress without re-architecting later.
           </p>
           <div class="impact-row">
-            <div class="impact"><span class="num i18n" data-en="Impact/Effort" data-ru="Impact/Effort">Impact/Effort</span><span class="lbl i18n" data-en="prioritization framework" data-ru="фреймворк приоритизации">prioritization framework</span></div>
-            <div class="impact"><span class="num i18n" data-en="Scoped" data-ru="Расширенный">Scoped</span><span class="lbl i18n" data-en="beyond original brief" data-ru="за рамки исходного ТЗ">beyond original brief</span></div>
-            <div class="impact"><span class="num i18n" data-en="Phased" data-ru="Поэтапная">Phased</span><span class="lbl i18n" data-en="delivery, no re-architecture" data-ru="поставка без переработки архитектуры">delivery, no re-architecture</span></div>
+            <div class="impact"><span class="num i18n" data-en="Reframed" data-ru="Переопределил">Reframed</span><span class="lbl i18n" data-en="scope from standalone reports to shared data access" data-ru="скоуп с отдельных отчётов на общий доступ к данным">scope from standalone reports to shared data access</span></div>
+            <div class="impact"><span class="num i18n" data-en="Impact/Effort" data-ru="Impact/Effort">Impact/Effort</span><span class="lbl i18n" data-en="framework used to align stakeholders" data-ru="фреймворк для согласования со стейкхолдерами">framework used to align stakeholders</span></div>
+            <div class="impact"><span class="num i18n" data-en="Phase 1 live" data-ru="1-я фаза в проде">Phase 1 live</span><span class="lbl i18n" data-en="shipped as production groundwork, not a prototype" data-ru="выпущена как рабочая основа системы, а не прототип">shipped as production groundwork, not a prototype</span></div>
+            <div class="impact"><span class="num i18n" data-en="Zero rework" data-ru="Без переделок">Zero rework</span><span class="lbl i18n" data-en="later phases build on the same architecture" data-ru="следующие фазы строятся на той же архитектуре">later phases build on the same architecture</span></div>
           </div>
           <div class="case-link">
             <a href="https://www.behance.net/gallery/249010515/RZD-Analytics-workspace" class="btn i18n" data-en="View case on Behance →" data-ru="Смотреть кейс на Behance →">View case on Behance →</a>
@@ -488,12 +484,12 @@
             data-ru="Спроектировал режим инклюзивного интерфейса, основанный на конкретных проверяемых критериях, а не на интуиции: переключатель доступности повышает контраст, добавляет видимую обводку фокуса вместо кнопок только с заливкой, делает границы табов чётче и переструктурирует подписи полей ввода — всё провалидировано по WCAG 2.1 AA, а не по общим предположениям.">
             Designed an inclusive interface mode grounded in specific, testable criteria rather than intuition alone: an accessibility toggle that raises contrast, adds visible focus outlines instead of fill-only buttons, clarifies tab boundaries, and restructures input labeling — validated against WCAG 2.1 AA rather than general best-practice guesses.
           </p>
-          <div class="criteria-row">
-            <span class="criteria">WCAG 2.1 AA</span>
-            <span class="criteria i18n" data-en="Contrast ratios" data-ru="Контрастность">Contrast ratios</span>
-            <span class="criteria i18n" data-en="Touch target sizing" data-ru="Размер тач-таргетов">Touch target sizing</span>
-            <span class="criteria i18n" data-en="Keyboard navigation" data-ru="Навигация с клавиатуры">Keyboard navigation</span>
-            <span class="criteria i18n" data-en="Screen reader labeling" data-ru="Разметка для скринридеров">Screen reader labeling</span>
+          <div class="impact-row">
+            <div class="impact"><span class="num">WCAG 2.1 AA</span><span class="lbl i18n" data-en="compliance target" data-ru="целевой стандарт">compliance target</span></div>
+            <div class="impact"><span class="num i18n" data-en="Contrast" data-ru="Контраст">Contrast</span><span class="lbl i18n" data-en="ratios validated, not eyeballed" data-ru="соотношения провалидированы, не на глаз">ratios validated, not eyeballed</span></div>
+            <div class="impact"><span class="num i18n" data-en="Focus states" data-ru="Фокус-состояния">Focus states</span><span class="lbl i18n" data-en="visible outlines, not fill-only" data-ru="видимая обводка вместо только заливки">visible outlines, not fill-only</span></div>
+            <div class="impact"><span class="num i18n" data-en="Tab order" data-ru="Tab-порядок">Tab order</span><span class="lbl i18n" data-en="boundaries clarified" data-ru="границы уточнены">boundaries clarified</span></div>
+            <div class="impact"><span class="num i18n" data-en="Labels" data-ru="Подписи">Labels</span><span class="lbl i18n" data-en="restructured for screen readers" data-ru="переструктурированы для скринридеров">restructured for screen readers</span></div>
           </div>
           <div class="case-link">
             <a href="https://www.behance.net/gallery/249355107/SBERBANK-SBOLpro-Accessibility" class="btn i18n" data-en="View case on Behance →" data-ru="Смотреть кейс на Behance →">View case on Behance →</a>
@@ -585,6 +581,7 @@
         <div><span class="i18n" data-en="portfolio" data-ru="портфолио">portfolio</span><a href="https://behance.net/0131f32f">behance.net/0131f32f</a></div>
         <div><span>email</span><a href="mailto:rouchmack@gmail.com">rouchmack@gmail.com</a></div>
         <div><span>telegram</span><a href="https://t.me/arseniibb">@arseniibb</a></div>
+        <div><span>linkedin</span><a href="https://www.linkedin.com/in/arseny-berezin-618a4437a/" target="_blank" rel="noopener">arseny-berezin</a></div>
       </div>
       <div class="hero-links" style="margin-top:24px;">
         <a href="mailto:rouchmack@gmail.com" class="btn primary i18n" data-en="Say hello" data-ru="Написать">Say hello</a>
