@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arseniy Berezin — Senior Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #131419;
+    --panel: #1a1b22;
+    --panel-2: #202129;
+    --line: #2b2d37;
+    --dotted: #33353f;
+    --text: #eceef2;
+    --text-dim: #8b8e98;
+    --text-faint: #52545e;
+    --measure: #ff5673;
+    --select: #5b8def;
+    --gold: #e8b86d;
+    --figma-yellow: #ffcd29;
+
+    --font-display: 'Archivo', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  ::selection{ background: var(--select); color: #0c0d10; }
+  :focus-visible{ outline: 2px solid var(--select); outline-offset: 3px; border-radius: 3px; }
+
+  .wrap{ max-width: 920px; margin: 0 auto; padding: 0 24px; }
+
+  .canvas-bg{
+    background-image: radial-gradient(var(--dotted) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(19,20,25,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: 920px; margin:0 auto; padding: 16px 24px;
+    display:flex; align-items:center; justify-content: space-between; gap: 16px;
+  }
+  .nav-logo{ font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); white-space: nowrap; }
+  .nav-logo b{ color: var(--text); }
+  .nav-links{ display:flex; gap: 22px; flex-wrap: wrap; }
+  .nav-links a{
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim);
+    text-decoration: none; transition: color .15s ease;
+  }
+  .nav-links a:hover{ color: var(--select); }
+
+  .lang-toggle{
+    display:flex; gap:2px; font-family: var(--font-mono); font-size: 12px;
+    border: 1px solid var(--line); border-radius: 4px; overflow: hidden; flex-shrink:0;
+  }
+  .lang-toggle button{
+    background: transparent; border: none; color: var(--text-dim);
+    padding: 6px 10px; cursor: pointer; font-family: var(--font-mono); font-size: 12px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .lang-toggle button.active{ background: var(--select); color: #0c0d10; }
+  .lang-toggle button:not(.active):hover{ color: var(--text); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 70px 0 60px; position: relative; }
+
+  .figma-cursor{
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    animation: cursorMove 16s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+  .figma-cursor svg{ display:block; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
+  .figma-cursor .tag{
+    position: absolute;
+    top: 20px; left: 16px;
+    background: var(--figma-yellow);
+    color: #1a1300;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px 10px 10px 10px;
+    white-space: nowrap;
+  }
+  @keyframes cursorMove{
+    0%   { transform: translate(10px, 40px);    opacity: 0; }
+    6%   { opacity: 1; }
+    22%  { transform: translate(340px, 10px);   opacity: 1; }
+    38%  { transform: translate(520px, 160px);  opacity: 1; }
+    46%  { opacity: 0; }
+    50%  { transform: translate(60px, 220px);   opacity: 0; }
+    58%  { opacity: 1; }
+    74%  { transform: translate(400px, 260px);  opacity: 1; }
+    88%  { transform: translate(120px, 90px);   opacity: 1; }
+    94%  { opacity: 0; }
+    100% { transform: translate(10px, 40px);    opacity: 0; }
+  }
+
+  .frame{
+    position: relative;
+    z-index: 1;
+    border: 1.5px solid var(--select);
+    border-radius: 4px;
+    padding: 46px 44px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .frame::after{
+    content:"";
+    position:absolute; top:0; left:-60%;
+    width: 40%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(91,141,239,0.12), transparent);
+    transform: skewX(-20deg);
+    opacity: 0;
+  }
+  .frame.shimmer::after{ animation: shimmerSweep .7s ease; }
+  @keyframes shimmerSweep{
+    0%{ left:-60%; opacity: 0; }
+    15%{ opacity: 1; }
+    100%{ left: 130%; opacity: 0; }
+  }
+
+  .handle{
+    position:absolute; width:7px; height:7px;
+    background: var(--bg); border: 1.5px solid var(--select);
+    border-radius: 1px; z-index: 2;
+  }
+  .handle.tl{ top:-4.5px; left:-4.5px; }
+  .handle.tr{ top:-4.5px; right:-4.5px; }
+  .handle.bl{ bottom:-4.5px; left:-4.5px; }
+  .handle.br{ bottom:-4.5px; right:-4.5px; }
+
+  .frame-label{
+    position: absolute; top: -26px; left: -1.5px; z-index: 2;
+    font-family: var(--font-mono); font-size: 11px; color: var(--select);
+    background: var(--bg); padding: 2px 6px;
+  }
+
+  .eyebrow{ font-family: var(--font-mono); font-size: 12.5px; color: var(--gold); margin-bottom: 14px; letter-spacing: 0.02em; position: relative; z-index: 1; }
+  h1{ font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 5vw, 52px); letter-spacing: -0.02em; line-height: 1.08; position: relative; z-index: 1; }
+  .role-line{ font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--text-dim); margin-top: 12px; position: relative; z-index: 1; }
+  .hero-desc{ margin-top: 22px; max-width: 560px; color: var(--text-dim); font-size: 15.5px; position: relative; z-index: 1; }
+
+  .dim-line{ display:flex; align-items:center; gap: 8px; margin-top: 30px; font-family: var(--font-mono); font-size: 12px; color: var(--measure); position: relative; z-index: 1; }
+  .dim-line .stroke{ flex: 1; height: 1px; background: var(--measure); position: relative; max-width: 220px; }
+  .dim-line .stroke::before, .dim-line .stroke::after{ content:""; position:absolute; top:-3px; width:1px; height:7px; background: var(--measure); }
+  .dim-line .stroke::before{ left:0; }
+  .dim-line .stroke::after{ right:0; }
+
+  .hero-links{ margin-top: 30px; display:flex; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn{
+    font-family: var(--font-mono); font-size: 13px; padding: 11px 18px; border-radius: 4px;
+    text-decoration: none; border: 1px solid var(--line); color: var(--text);
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    display: inline-block;
+  }
+  .btn:hover{ transform: translateY(-1px); border-color: var(--select); background: rgba(91,141,239,0.08); }
+  .btn.primary{ background: var(--select); border-color: var(--select); color: #0c0d10; font-weight: 600; }
+  .btn.primary:hover{ background: #78a2f5; }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 78px 0; scroll-margin-top: 70px; }
+  .layer-label{ display:flex; align-items:center; gap:10px; font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-bottom: 10px; }
+  .layer-label::before{ content:"▸"; color: var(--select); }
+  .section-head h2{ font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.01em; margin-bottom: 36px; }
+
+  .fade{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .fade.in{ opacity:1; transform: translateY(0); }
+
+  .about-text{ max-width: 640px; color: var(--text-dim); font-size: 15.5px; }
+  .about-text strong{ color: var(--text); font-weight: 600; }
+  .about-text p{ margin-bottom: 16px; }
+
+  /* case studies as frames */
+  .case{
+    position: relative;
+    background: var(--panel);
+    border: 1.5px solid var(--select);
+    border-radius: 4px;
+    padding: 34px 36px;
+    margin: 34px 0 20px;
+    overflow: hidden;
+  }
+  .case::after{
+    content:"";
+    position:absolute; top:0; left:-60%; width: 40%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(91,141,239,0.12), transparent);
+    transform: skewX(-20deg); opacity: 0;
+  }
+  .case.shimmer::after{ animation: shimmerSweep .7s ease; }
+
+  .case-top{ display:flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; position: relative; z-index:1; }
+  .case-top h3{ font-family: var(--font-display); font-size: 20px; font-weight: 700; }
+  .case-tag{ font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); border: 1px solid var(--line); border-radius: 3px; padding: 3px 8px; white-space: nowrap; }
+  .case p.desc{ color: var(--text-dim); font-size: 14.5px; margin: 14px 0 20px; max-width: 620px; position: relative; z-index:1; }
+
+  .impact-row{ display:flex; gap: 28px; flex-wrap: wrap; position: relative; z-index:1; }
+  .impact{ display:flex; flex-direction: column; }
+  .impact .num{ font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--measure); }
+  .impact .lbl{ font-size: 12px; color: var(--text-faint); margin-top: 2px; max-width: 140px; }
+
+  .criteria-row{ display:flex; gap: 10px; flex-wrap: wrap; position: relative; z-index:1; }
+  .criteria{
+    font-family: var(--font-mono); font-size: 12px; color: var(--gold);
+    border: 1px solid var(--line); border-radius: 3px; padding: 6px 10px;
+  }
+
+  .case-link{
+    margin-top: 22px; position: relative; z-index:1;
+  }
+
+  .more-cases{ text-align:center; margin-top: 12px; }
+
+  /* skills */
+  .tokens-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+  .token{ background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; position: relative; overflow: hidden; }
+  .token::after{ content:""; position:absolute; top:0; left:-60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(91,141,239,0.1), transparent); transform: skewX(-20deg); opacity: 0; }
+  .token.shimmer::after{ animation: shimmerSweep .7s ease; }
+  .token .swatch{ width: 100%; height: 26px; border-radius: 3px; margin-bottom: 12px; }
+  .token .name{ font-family: var(--font-mono); font-size: 12.5px; color: var(--text); position: relative; z-index:1; }
+  .token .desc{ font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); margin-top: 3px; position: relative; z-index:1; }
+
+  /* experience */
+  .exp-row{ display:flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .exp-row:last-child{ border-bottom: none; }
+  .exp-period{ font-family: var(--font-mono); font-size: 12.5px; color: var(--text-faint); min-width: 120px; padding-top: 3px; }
+  .exp-main h3{ font-family: var(--font-display); font-size: 17px; font-weight: 700; }
+  .exp-main .co{ color: var(--select); font-weight: 600; }
+  .exp-main p{ color: var(--text-dim); font-size: 14px; margin-top: 6px; max-width: 560px; }
+
+  /* contact */
+  .contact-frame{ position: relative; background: var(--panel); border: 1.5px solid var(--select); border-radius: 4px; padding: 34px 36px; overflow:hidden; }
+  .contact-frame::after{ content:""; position:absolute; top:0; left:-60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(91,141,239,0.12), transparent); transform: skewX(-20deg); opacity: 0; }
+  .contact-frame.shimmer::after{ animation: shimmerSweep .7s ease; }
+  .contact-frame p{ color: var(--text-dim); font-size: 15px; max-width: 480px; margin-bottom: 22px; position: relative; z-index:1; }
+  .contact-list{ display:flex; flex-direction: column; gap: 10px; font-family: var(--font-mono); font-size: 13.5px; position: relative; z-index:1; }
+  .contact-list a{ text-decoration: none; color: var(--text); }
+  .contact-list a:hover{ color: var(--select); }
+  .contact-list span{ color: var(--text-faint); margin-right: 10px; }
+
+  footer{ padding: 40px 0 60px; text-align:center; color: var(--text-faint); font-family: var(--font-mono); font-size: 12px; }
+
+  @media (max-width: 680px){
+    .frame{ padding: 32px 24px; }
+    .section-head h2{ font-size: 23px; }
+    .exp-row{ flex-direction: column; gap: 6px; }
+    .figma-cursor{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
+    .fade{ opacity: 1; transform: none; }
+    .figma-cursor{ display:none; }
+  }
+</style>
+</head>
+<body class="canvas-bg">
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><b>A. Berezin</b> / product design</div>
+    <div class="nav-links">
+      <a href="#about" class="i18n" data-en="About" data-ru="Обо мне">About</a>
+      <a href="#work" class="i18n" data-en="Case Studies" data-ru="Кейсы">Case Studies</a>
+      <a href="#skills" class="i18n" data-en="Skills" data-ru="Навыки">Skills</a>
+      <a href="#experience" class="i18n" data-en="Experience" data-ru="Опыт">Experience</a>
+      <a href="#contact" class="i18n" data-en="Contact" data-ru="Контакты">Contact</a>
+    </div>
+    <div class="lang-toggle">
+      <button data-lang-btn="en" class="active">EN</button>
+      <button data-lang-btn="ru">RU</button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="figma-cursor" style="top:0; left:0;">
+      <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+        <path d="M1 1L1 19.5L6 15L9.5 22L12.5 20.5L9 13.5L15.5 13.5L1 1Z" fill="#ffcd29" stroke="#1a1300" stroke-width="1"/>
+      </svg>
+      <span class="tag">Arseniy</span>
+    </div>
+
+    <div class="frame">
+      <span class="frame-label">Frame — hero / 920×auto</span>
+      <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
+
+      <div class="eyebrow i18n" data-en="Open to new opportunities" data-ru="Открыт к новым проектам">Open to new opportunities</div>
+      <h1>Arseniy Berezin</h1>
+      <div class="role-line i18n" data-en="Senior Product Designer — B2B, Fintech, Complex Systems" data-ru="Senior Product Designer — B2B, финтех, сложные системы">Senior Product Designer — B2B, Fintech, Complex Systems</div>
+      <p class="hero-desc i18n" data-en="6+ years designing products for complex domains: banking services, logistics, operational tools. From research and hypothesis — to implementation and metrics." data-ru="6+ лет проектирую продукты для сложных доменов: банковские сервисы, логистика, операционные инструменты. От исследования и гипотезы — до внедрения и метрик.">6+ years designing products for complex domains: banking services, logistics, operational tools. From research and hypothesis — to implementation and metrics.</p>
+
+      <div class="dim-line">
+        <span class="i18n" data-en="6+ years" data-ru="6+ лет">6+ years</span><span class="stroke"></span><span class="i18n" data-en="enterprise & fintech" data-ru="энтерпрайз и финтех">enterprise & fintech</span>
+      </div>
+
+      <div class="hero-links">
+        <a href="https://behance.net/0131f32f" class="btn primary i18n" data-en="Portfolio on Behance →" data-ru="Портфолио на Behance →">Portfolio on Behance →</a>
+        <a href="#contact" class="btn i18n" data-en="Get in touch" data-ru="Связаться">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <div class="layer-label i18n" data-en="layer / about" data-ru="layer / about">layer / about</div>
+      <h2 class="i18n" data-en="About" data-ru="Обо мне">About</h2>
+    </div>
+    <div class="about-text fade i18n"
+      data-en='<p>I&rsquo;m a product designer specializing in <strong>complex B2B and B2B2C products</strong> &mdash; where a solution can&rsquo;t be designed well without understanding the business process from the inside. I currently work at <strong>Yandex</strong>, designing partner tooling for the delivery service and operational products.</p><p>Before that, I was <strong>Lead Product Designer at Sberbank</strong> (Apr 2024 &ndash; Oct 2025), leading the B2B2C banking product SBOL.pro &mdash; from hypothesis to implementation, defending decisions in front of stakeholders based on interviews and A/B tests.</p><p>I also focus on <strong>interface accessibility</strong> (WCAG 2.1 AA) and building <strong>design systems from scratch</strong> &mdash; including one that grew to 180+ components.</p>'
+      data-ru='<p>Я product-дизайнер, специализируюсь на <strong>сложных B2B и B2B2C продуктах</strong> &mdash; там, где решение нельзя красиво спроектировать, не поняв бизнес-процесс изнутри. Сейчас в <strong>Яндексе</strong> занимаюсь инструментами для партнёров службы доставки и операционными продуктами.</p><p>До этого &mdash; <strong>ведущий продуктовый дизайнер в Сбербанке</strong> (апрель 2024 &ndash; октябрь 2025), вёл банковский B2B2C-продукт SBOL.pro: от гипотезы до внедрения, с защитой решений перед командой на основе интервью и A/B-тестов.</p><p>Отдельно фокусируюсь на <strong>доступности интерфейсов</strong> (WCAG 2.1 AA) и построении <strong>дизайн-систем с нуля</strong> &mdash; включая одну, выросшую до 180+ компонентов.</p>'>
+      <p>I&rsquo;m a product designer specializing in <strong>complex B2B and B2B2C products</strong> — where a solution can't be designed well without understanding the business process from the inside. I currently work at <strong>Yandex</strong>, designing partner tooling for the delivery service and operational products.</p>
+      <p>Before that, I was <strong>Lead Product Designer at Sberbank</strong> (Apr 2024 – Oct 2025), leading the B2B2C banking product SBOL.pro — from hypothesis to implementation, defending decisions in front of stakeholders based on interviews and A/B tests.</p>
+      <p>I also focus on <strong>interface accessibility</strong> (WCAG 2.1 AA) and building <strong>design systems from scratch</strong> — including one that grew to 180+ components.</p>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-head">
+      <div class="layer-label i18n" data-en="layer / case studies" data-ru="layer / кейсы">layer / case studies</div>
+      <h2 class="i18n" data-en="Selected Case Studies" data-ru="Избранные кейсы">Selected Case Studies</h2>
+    </div>
+
+    <div class="case fade">
+      <span class="frame-label">Frame — sbol-start-of-service / 880×auto</span>
+      <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
+      <div class="case-top">
+        <h3 class="i18n" data-en="SBOL.pro — Client Identification Redesign" data-ru="SBOL.pro — редизайн идентификации клиента">SBOL.pro — Client Identification Redesign</h3>
+        <span class="case-tag i18n" data-en="Sberbank · B2B2C · Fintech" data-ru="Сбербанк · B2B2C · Финтех">Sberbank · B2B2C · Fintech</span>
+      </div>
+      <p class="desc i18n"
+        data-en="Led the redesign of the client identification flow from hypothesis to rollout: 15+ user interviews, prototyping, and A/B testing, defending decisions in front of the product team. In parallel, built the product's design system from scratch — 180+ components — that sped up feature delivery and cut UI inconsistencies across the team."
+        data-ru="Провёл редизайн процесса идентификации клиентов от гипотезы до внедрения: 15+ интервью, прототипирование, A/B-тестирование решений с защитой перед командой. Параллельно с нуля построил дизайн-систему продукта — 180+ компонентов, — которая ускорила разработку фич и снизила количество несостыковок в UI по команде.">
+        Led the redesign of the client identification flow from hypothesis to rollout: 15+ user interviews, prototyping, and A/B testing, defending decisions in front of the product team. In parallel, built the product's design system from scratch — 180+ components — that sped up feature delivery and cut UI inconsistencies across the team.
+      </p>
+      <div class="impact-row">
+        <div class="impact"><span class="num">−37%</span><span class="lbl i18n" data-en="time per operation" data-ru="времени на операцию">time per operation</span></div>
+        <div class="impact"><span class="num">+12%</span><span class="lbl i18n" data-en="conversion" data-ru="конверсии">conversion</span></div>
+        <div class="impact"><span class="num">180+</span><span class="lbl i18n" data-en="design system components" data-ru="компонентов дизайн-системы">design system components</span></div>
+        <div class="impact"><span class="num">+20%</span><span class="lbl i18n" data-en="faster feature delivery" data-ru="скорость разработки фич">faster feature delivery</span></div>
+        <div class="impact"><span class="num">−35%</span><span class="lbl i18n" data-en="UI bugs" data-ru="UI-багов">UI bugs</span></div>
+      </div>
+      <div class="case-link">
+        <a href="https://www.behance.net/gallery/248956647/SBERBANK-SBOLpro-Start-of-service" class="btn i18n" data-en="View case on Behance →" data-ru="Смотреть кейс на Behance →">View case on Behance →</a>
+      </div>
+    </div>
+
+    <div class="case fade">
+      <span class="frame-label">Frame — rzd-analytics-workspace / 880×auto</span>
+      <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
+      <div class="case-top">
+        <h3 class="i18n" data-en="RZD Analytics Workspace" data-ru="RZD Analytics Workspace">RZD Analytics Workspace</h3>
+        <span class="case-tag i18n" data-en="Analytics · Enterprise" data-ru="Аналитика · Enterprise">Analytics · Enterprise</span>
+      </div>
+      <p class="desc i18n"
+        data-en="The initial brief called for a set of standalone reports — but that would only partially fix the real problem: fragmented data access across teams. I used an Impact/Effort framework to align stakeholders on a phased approach: the first modules shipped as production-ready parts of the eventual system, not throwaway prototypes — giving fast visible progress without re-architecting later."
+        data-ru="Изначальное ТЗ предполагало набор отдельных отчётов — но это решало проблему лишь частично: доступ к данным оставался фрагментированным между командами. Я использовал фреймворк Impact/Effort, чтобы согласовать со стейкхолдерами поэтапный подход: первые модули были выпущены как рабочие части будущей системы, а не одноразовые прототипы — это дало быстрый видимый результат без переработки архитектуры в будущем.">
+        The initial brief called for a set of standalone reports — but that would only partially fix the real problem: fragmented data access across teams. I used an Impact/Effort framework to align stakeholders on a phased approach: the first modules shipped as production-ready parts of the eventual system, not throwaway prototypes — giving fast visible progress without re-architecting later.
+      </p>
+      <div class="impact-row">
+        <div class="impact"><span class="num i18n" data-en="Impact/Effort" data-ru="Impact/Effort">Impact/Effort</span><span class="lbl i18n" data-en="prioritization framework" data-ru="фреймворк приоритизации">prioritization framework</span></div>
+        <div class="impact"><span class="num i18n" data-en="Scoped" data-ru="Расширенный">Scoped</span><span class="lbl i18n" data-en="beyond original brief" data-ru="за рамки исходного ТЗ">beyond original brief</span></div>
+        <div class="impact"><span class="num i18n" data-en="Phased" data-ru="Поэтапная">Phased</span><span class="lbl i18n" data-en="delivery, no re-architecture" data-ru="поставка без переработки архитектуры">delivery, no re-architecture</span></div>
+      </div>
+      <div class="case-link">
+        <a href="https://www.behance.net/gallery/249010515/RZD-Analytics-workspace" class="btn i18n" data-en="View case on Behance →" data-ru="Смотреть кейс на Behance →">View case on Behance →</a>
+      </div>
+    </div>
+
+    <div class="case fade">
+      <span class="frame-label">Frame — sbol-accessibility / 880×auto</span>
+      <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
+      <div class="case-top">
+        <h3 class="i18n" data-en="SBOL.pro — Accessibility &amp; Inclusive Interface" data-ru="SBOL.pro — доступность и инклюзивный интерфейс">SBOL.pro — Accessibility & Inclusive Interface</h3>
+        <span class="case-tag i18n" data-en="Sberbank · Accessibility" data-ru="Сбербанк · Accessibility">Sberbank · Accessibility</span>
+      </div>
+      <p class="desc i18n"
+        data-en="Designed an inclusive interface mode grounded in specific, testable criteria rather than intuition alone: an accessibility toggle that raises contrast, adds visible focus outlines instead of fill-only buttons, clarifies tab boundaries, and restructures input labeling — validated against WCAG 2.1 AA rather than general best-practice guesses."
+        data-ru="Спроектировал режим инклюзивного интерфейса, основанный на конкретных проверяемых критериях, а не на интуиции: переключатель доступности повышает контраст, добавляет видимую обводку фокуса вместо кнопок только с заливкой, делает границы табов чётче и переструктурирует подписи полей ввода — всё провалидировано по WCAG 2.1 AA, а не по общим предположениям.">
+        Designed an inclusive interface mode grounded in specific, testable criteria rather than intuition alone: an accessibility toggle that raises contrast, adds visible focus outlines instead of fill-only buttons, clarifies tab boundaries, and restructures input labeling — validated against WCAG 2.1 AA rather than general best-practice guesses.
+      </p>
+      <div class="criteria-row">
+        <span class="criteria">WCAG 2.1 AA</span>
+        <span class="criteria i18n" data-en="Contrast ratios" data-ru="Контрастность">Contrast ratios</span>
+        <span class="criteria i18n" data-en="Touch target sizing" data-ru="Размер тач-таргетов">Touch target sizing</span>
+        <span class="criteria i18n" data-en="Keyboard navigation" data-ru="Навигация с клавиатуры">Keyboard navigation</span>
+        <span class="criteria i18n" data-en="Screen reader labeling" data-ru="Разметка для скринридеров">Screen reader labeling</span>
+      </div>
+      <div class="case-link">
+        <a href="https://www.behance.net/gallery/249355107/SBERBANK-SBOLpro-Accessibility" class="btn i18n" data-en="View case on Behance →" data-ru="Смотреть кейс на Behance →">View case on Behance →</a>
+      </div>
+    </div>
+
+    <div class="more-cases fade">
+      <a href="https://www.behance.net/0131f32f/projects" class="btn primary i18n" data-en="More case studies on Behance →" data-ru="Больше кейсов на Behance →">More case studies on Behance →</a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <div class="layer-label i18n" data-en="layer / skills & tools" data-ru="layer / навыки и инструменты">layer / skills & tools</div>
+      <h2 class="i18n" data-en="Specialization" data-ru="Специализация">Specialization</h2>
+    </div>
+    <div class="tokens-grid fade">
+      <div class="token"><div class="swatch" style="background:var(--select)"></div><div class="name i18n" data-en="B2B / Enterprise" data-ru="B2B / Enterprise">B2B / Enterprise</div><div class="desc i18n" data-en="complex systems" data-ru="сложные системы">complex systems</div></div>
+      <div class="token"><div class="swatch" style="background:var(--measure)"></div><div class="name i18n" data-en="Fintech" data-ru="Финтех">Fintech</div><div class="desc i18n" data-en="banking products" data-ru="банковские продукты">banking products</div></div>
+      <div class="token"><div class="swatch" style="background:var(--gold)"></div><div class="name i18n" data-en="Logistics / Operations" data-ru="Логистика / Operations">Logistics / Operations</div><div class="desc i18n" data-en="process interfaces" data-ru="процессные интерфейсы">process interfaces</div></div>
+      <div class="token"><div class="swatch" style="background:#7fd1a8"></div><div class="name i18n" data-en="Design Systems" data-ru="Дизайн-системы">Design Systems</div><div class="desc i18n" data-en="built from scratch" data-ru="с нуля">built from scratch</div></div>
+      <div class="token"><div class="swatch" style="background:#c792ea"></div><div class="name i18n" data-en="Research-Driven UX" data-ru="Research-Driven UX">Research-Driven UX</div><div class="desc i18n" data-en="interviews, hypotheses" data-ru="интервью, гипотезы">interviews, hypotheses</div></div>
+      <div class="token"><div class="swatch" style="background:#82aaff"></div><div class="name i18n" data-en="Usability & A/B Testing" data-ru="Юзабилити- и A/B-тесты">Usability & A/B Testing</div><div class="desc i18n" data-en="validated decisions" data-ru="проверенные решения">validated decisions</div></div>
+      <div class="token"><div class="swatch" style="background:#8b8e98"></div><div class="name i18n" data-en="Accessibility" data-ru="Accessibility">Accessibility</div><div class="desc i18n" data-en="WCAG 2.1 AA" data-ru="WCAG 2.1 AA">WCAG 2.1 AA</div></div>
+      <div class="token"><div class="swatch" style="background:#f78c6c"></div><div class="name i18n" data-en="Prioritization Frameworks" data-ru="Фреймворки приоритизации">Prioritization Frameworks</div><div class="desc i18n" data-en="Impact/Effort, RICE, MoSCoW" data-ru="Impact/Effort, RICE, MoSCoW">Impact/Effort, RICE, MoSCoW</div></div>
+      <div class="token"><div class="swatch" style="background:#ffcb6b"></div><div class="name i18n" data-en="Figma & Prototyping" data-ru="Figma и прототипирование">Figma & Prototyping</div><div class="desc i18n" data-en="low-fi to hi-fi" data-ru="low-fi → hi-fi">low-fi to hi-fi</div></div>
+      <div class="token"><div class="swatch" style="background:#89ca78"></div><div class="name i18n" data-en="AI-Assisted Design" data-ru="AI-инструменты в дизайне">AI-Assisted Design</div><div class="desc i18n" data-en="prototyping & assets" data-ru="прототипирование, ассеты">prototyping & assets</div></div>
+      <div class="token"><div class="swatch" style="background:#ff9db8"></div><div class="name i18n" data-en="Mentoring & Hiring" data-ru="Наставничество и найм">Mentoring & Hiring</div><div class="desc i18n" data-en="junior designers" data-ru="младшие дизайнеры">junior designers</div></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <div class="layer-label i18n" data-en="layer / experience" data-ru="layer / опыт">layer / experience</div>
+      <h2 class="i18n" data-en="Experience" data-ru="Опыт работы">Experience</h2>
+    </div>
+    <div class="fade">
+      <div class="exp-row">
+        <div class="exp-period i18n" data-en="Present" data-ru="наст. время">Present</div>
+        <div class="exp-main">
+          <h3><span class="i18n" data-en="Product Designer" data-ru="Продуктовый дизайнер">Product Designer</span> — <span class="co">Yandex</span></h3>
+          <p class="i18n" data-en="Partner tooling for the delivery service and operational products." data-ru="Инструменты для партнёров службы доставки, операционные сервисы.">Partner tooling for the delivery service and operational products.</p>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-period i18n" data-en="Apr 2024 – Oct 2025" data-ru="апр 2024 – окт 2025">Apr 2024 – Oct 2025</div>
+        <div class="exp-main">
+          <h3><span class="i18n" data-en="Lead Product Designer" data-ru="Ведущий продуктовый дизайнер">Lead Product Designer</span> — <span class="co">Sberbank</span></h3>
+          <p class="i18n" data-en="B2B2C banking product SBOL.pro — from research to rollout; built a 180+ component design system from scratch." data-ru="B2B2C банковский продукт SBOL.pro — от исследования до внедрения; с нуля построил дизайн-систему из 180+ компонентов.">B2B2C banking product SBOL.pro — from research to rollout; built a 180+ component design system from scratch.</p>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-period i18n" data-en="Project" data-ru="Проект">Project</div>
+        <div class="exp-main">
+          <h3><span class="i18n" data-en="Product Designer" data-ru="Продуктовый дизайнер">Product Designer</span> — <span class="co">RZD</span></h3>
+          <p class="i18n" data-en="Analytics Workspace — dashboard system for cross-team data access." data-ru="Analytics Workspace — система дашбордов для доступа к данным между командами.">Analytics Workspace — dashboard system for cross-team data access.</p>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-period i18n" data-en="Project" data-ru="Проект">Project</div>
+        <div class="exp-main">
+          <h3><span class="i18n" data-en="Product Designer" data-ru="Продуктовый дизайнер">Product Designer</span> — <span class="co">X5</span></h3>
+          <p class="i18n" data-en="Digital Supplier Cabinet — B2B personal cabinet for suppliers." data-ru="Digital Supplier Cabinet — B2B личный кабинет для поставщиков.">Digital Supplier Cabinet — B2B personal cabinet for suppliers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <div class="layer-label i18n" data-en="layer / contact" data-ru="layer / контакты">layer / contact</div>
+      <h2 class="i18n" data-en="Get in Touch" data-ru="Связаться">Get in Touch</h2>
+    </div>
+    <div class="contact-frame fade">
+      <span class="frame-label">Frame — contact / 880×auto</span>
+      <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
+      <p class="i18n" data-en="Open to discussing new projects and product design roles — especially in B2B, fintech, and enterprise domains." data-ru="Открыт к обсуждению новых проектов и вакансий в продуктовом дизайне — особенно в B2B, финтехе и энтерпрайзе.">Open to discussing new projects and product design roles — especially in B2B, fintech, and enterprise domains.</p>
+      <div class="contact-list">
+        <div><span class="i18n" data-en="portfolio" data-ru="портфолио">portfolio</span><a href="https://behance.net/0131f32f">behance.net/0131f32f</a></div>
+        <div><span>email</span><a href="mailto:rouchmack@gmail.com">rouchmack@gmail.com</a></div>
+        <div><span>telegram</span><a href="https://t.me/arseniibb">@arseniibb</a></div>
+      </div>
+      <div class="hero-links" style="margin-top:24px;">
+        <a href="mailto:rouchmack@gmail.com" class="btn primary i18n" data-en="Say hello" data-ru="Написать">Say hello</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>Arseniy Berezin — Senior Product Designer</footer>
+
+<script>
+  // ---- Language toggle ----
+  const i18nEls = document.querySelectorAll('.i18n');
+  const langBtns = document.querySelectorAll('[data-lang-btn]');
+  const htmlRoot = document.getElementById('htmlRoot');
+
+  function setLang(lang){
+    i18nEls.forEach(el => {
+      const val = el.dataset[lang];
+      if(val !== undefined) el.innerHTML = val;
+    });
+    langBtns.forEach(b => b.classList.toggle('active', b.dataset.langBtn === lang));
+    htmlRoot.setAttribute('lang', lang);
+  }
+  langBtns.forEach(btn => btn.addEventListener('click', () => setLang(btn.dataset.langBtn)));
+  setLang('en');
+
+  // ---- Scroll fade-ins + shimmer ----
+  const fadeEls = document.querySelectorAll('.fade');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => io.observe(el));
+
+  const shimmerTargets = document.querySelectorAll('.case, .contact-frame, .token');
+  const io2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('shimmer');
+        setTimeout(() => e.target.classList.remove('shimmer'), 800);
+        io2.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  shimmerTargets.forEach(el => io2.observe(el));
+</script>
+
+</body>
+</html>
